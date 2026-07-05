@@ -1,5 +1,6 @@
 import { Chance } from 'chance'
 import redis from '@/modules/node/redis'
+import type { WordSet } from '@/types/game'
 import type { NextApiHandlerExtended } from '@/types/next'
 import type { RedisRoom } from '@/types/redis'
 
@@ -10,9 +11,10 @@ export type CreateRoomResponseData = {
 }
 
 const handler: NextApiHandlerExtended<CreateRoomResponseData> = async (
-  _req,
+  req,
   res
 ) => {
+  const wordSet: WordSet = req.body?.wordSet === 'league' ? 'league' : 'default'
   const roomId = `${chance.word({ length: 5 })}-${chance.word({ length: 5 })}`
   const now = Date.now()
   const roomData: RedisRoom = {
@@ -22,6 +24,7 @@ const handler: NextApiHandlerExtended<CreateRoomResponseData> = async (
     liar: null,
     subject: null,
     keyword: null,
+    wordSet,
     createdAt: now,
     lastUpdatedAt: now,
   }

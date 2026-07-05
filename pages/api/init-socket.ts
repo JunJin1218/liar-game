@@ -1,6 +1,7 @@
 import type { NextApiRequest } from 'next'
 import { Server as SocketServer } from 'socket.io'
-import keywords, { type Subject } from '@/data/keywords'
+import defaultKeywords from '@/data/keywords'
+import leagueKeywords from '@/data/leagueKeywords'
 import cleanInactiveRooms from '@/modules/node/clean-inactive-rooms'
 import { getRoom, setRoom } from '@/modules/node/redis'
 import { isDev } from '@/modules/shared/is'
@@ -94,12 +95,14 @@ const createSocketListener =
       room.lastUpdatedAt = Date.now()
 
       if (room.phase === 'waiting') {
+        const keywords: Record<string, string[]> =
+          room.wordSet === 'league' ? leagueKeywords : defaultKeywords
         const liar =
           room.players[Math.floor(Math.random() * room.players.length)]
         const subjects = Object.keys(keywords)
         const subject = subjects[
           Math.floor(Math.random() * subjects.length)
-        ] as Subject
+        ]
         const keyword =
           keywords[subject][
             Math.floor(Math.random() * keywords[subject].length)

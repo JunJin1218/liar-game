@@ -38,6 +38,17 @@
   flex-direction: column;
 }
 
+.wordSetSelector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    font-size: 14px;
+    color: #666;
+  }
+}
+
 .title {
   font-size: 50px;
   font-weight: 500;

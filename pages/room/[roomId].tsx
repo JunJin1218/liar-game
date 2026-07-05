@@ -10,7 +10,7 @@ import { io } from 'socket.io-client'
 import dialog from '@/modules/browser/dialog'
 import { getSessionId } from '@/modules/browser/storage'
 import { getRoom } from '@/modules/node/redis'
-import type { Player } from '@/types/game'
+import type { Player, WordSet } from '@/types/game'
 import type { RedisRoom } from '@/types/redis'
 import type { GameSocketClient } from '@/types/socket'
 import type { CreateRoomResponseData } from '../api/create-room'
@@ -35,7 +35,9 @@ const Room = ({ isRoomAvailable }: RoomProps) => {
   const isRoomReady = socket !== undefined && routerRoomId !== 'create'
 
   const createRoom = async () => {
-    const res = await axios.post('/api/create-room')
+    const wordSet: WordSet =
+      router.query.wordSet === 'league' ? 'league' : 'default'
+    const res = await axios.post('/api/create-room', { wordSet })
     const { roomId } = res.data as CreateRoomResponseData
 
     return roomId
