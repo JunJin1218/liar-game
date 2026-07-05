@@ -2,9 +2,11 @@ import Redis from 'ioredis'
 import type { RedisRoom } from '@/types/redis'
 import { redisRoomSchema } from '../shared/schema'
 
-const redis = new Redis({
-  password: process.env.REDIS_PASSWORD,
-})
+const redis = process.env.REDIS_URL
+  ? new Redis(process.env.REDIS_URL)
+  : new Redis({
+      password: process.env.REDIS_PASSWORD || undefined,
+    })
 
 export default redis
 

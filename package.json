@@ -6,7 +6,7 @@
     "dev": "npm-run-all --parallel next:dev typecheck:watch",
     "next:dev": "next dev",
     "build": "next build",
-    "start": "next start --port 7728",
+    "start": "next start",
     "check": "biome check --write",
     "check:unsafe": "biome check --write --unsafe",
     "typecheck:watch": "tsc --noEmit --watch",
