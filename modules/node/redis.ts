@@ -29,9 +29,9 @@ export const getRoom = async (roomId: string): Promise<RedisRoom | null> => {
 
   try {
     const jsonParsed = JSON.parse(roomData)
-    redisRoomSchema.parse(jsonParsed)
+    const room = redisRoomSchema.parse(jsonParsed)
 
-    return jsonParsed
+    return room
   } catch (err) {
     console.error(err)
 

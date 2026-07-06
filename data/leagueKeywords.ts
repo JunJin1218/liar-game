@@ -2,7 +2,6 @@ export type Subject =
   | '챔피언'
   // | '아이템'
   | '키워드'
-  | '스킬이름'
 
 export type Keyword = {
   subject: Subject
@@ -395,9 +394,6 @@ const keywords: Record<Subject, string[]> = {
     'BeryL',
     'Meiko',
   ],
-  스킬이름: [
-
-  ]
 }
 
 // const keywords: Keyword[] = [

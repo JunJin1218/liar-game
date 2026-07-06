@@ -16,7 +16,7 @@ export const redisRoomSchema = z.object({
   ]),
   liar: z.nullable(z.object({ sessionId: z.string(), name: z.string() })),
   subject: z.nullable(z.string()),
-  keyword: z.nullable(z.string()),
+  keyword: z.nullable(z.string()).default(null),
   wordSet: z.union([z.literal('default'), z.literal('league')]).optional(),
   mode: z.union([z.literal('default'), z.literal('fool')]).optional(),
   liarKeyword: z.string().nullable().optional(),
